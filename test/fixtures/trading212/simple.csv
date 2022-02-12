@@ -1,0 +1,4 @@
+Action,Time,ISIN,Ticker,Name,No. of shares,Price / share,Currency (Price / share),Exchange rate,Total (GBP),Withholding tax,Currency (Withholding tax),Charge amount (GBP),Stamp duty reserve tax (GBP),Notes,ID
+Deposit,2021-08-27 09:54:04,,,,,,,,550.00,,,550.00,,,1DX
+Market buy,2021-09-02 07:01:55,IE00B3XXRP09,VUSA,"Vanguard S&P 500 ETF",8.0000000000,62.39,GBP,1.00000,499.14,,,,,,2DX
+Dividend (Ordinary),2021-10-06 15:41:57,IE00B3XXRP09,VUSA,"Vanguard S&P 500 ETF",8.0000000000,0.19,GBP,Not available,1.51,-0.00,GBP,,,,
