@@ -72,8 +72,8 @@ func newConvertCommand() *cobra.Command {
 				return err
 			}
 
-			fmt.Printf("\nstockopedia.csv has been written, ready to import\n")
-			fmt.Printf("https://app.stockopedia.com/portfolio\n")
+			fmt.Println("stockopedia.csv has been written, ready to import")
+			fmt.Println("https://app.stockopedia.com/portfolio")
 
 			return nil
 		},
