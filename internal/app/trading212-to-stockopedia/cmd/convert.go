@@ -7,6 +7,7 @@ import (
 	"github.com/jszwec/csvutil"
 	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
+	"io/fs"
 	"os"
 )
 
@@ -87,7 +88,7 @@ func newConvertCommand() *cobra.Command {
 	c.Flags().String("username", os.Getenv("STOCKO_USER"), "Username for stockopedia")
 	c.Flags().String("password", os.Getenv("STOCKO_PASS"), "Password for stockopedia")
 
-	_ = c.MarkFlagRequired("file")
+	cobra.CheckErr(c.MarkFlagRequired("file"))
 
 	return &c
 }
