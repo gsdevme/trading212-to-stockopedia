@@ -56,39 +56,58 @@ func Convert(t *[]TransactionCsvGBP, client *stocko.ApiClient, ticker Ticker) (*
 			transaction.Currency = trans.Currency
 
 			switch trans.Action {
+			case "Dividend (Ordinary)":
+				transaction.Type = stockopedia.TypeDividend
+				transaction.Price = trans.Price
+				transaction.Shares = trans.NoShares
+			case "Deposit":
+				transaction.Type = stockopedia.TypeDeposit
+				transaction.Price = trans.Total
+			case "Withdrawal":
+				transaction.Type = "WITHDRAWAL"
+				transaction.Price = trans.Total
 			case "Market buy":
-				transaction.Type = "buy"
-			case "Market sell", "Limit sell":
-				transaction.Type = "sell"
+				transaction.Type = stockopedia.TypeBuy
+				transaction.Price = trans.Price
+				transaction.Shares = trans.NoShares
+			case "Market sell", "Limit sell", "Stop limit sell":
+				transaction.Type = stockopedia.TypeSell
+				transaction.Price = trans.Price
+				transaction.Shares = trans.NoShares
 			}
 
-			transaction.Price = trans.Price
-			transaction.Shares = trans.NoShares
-			transaction.ExchangeRate = trans.ExchangeRate
+			transaction.ExchangeRate = "1"
+
+			if trans.ExchangeRate != ExchangeRateEmpty && trans.Currency != PenceCurrency {
+				transaction.ExchangeRate = trans.ExchangeRate
+			}
+
 			transaction.Date = t.Format("02/01/2006")
 			transaction.Time = t.Format("15:04:05")
 
-			r, err := client.SearchSecurity(trans.ISIN)
+			if trans.ISIN != "" {
+				r, err := client.SearchSecurity(trans.ISIN)
 
-			if err != nil {
-				log.Errorf("unable to match security %s: %w", trans.Ticker, err)
+				if err != nil {
+					log.Errorf("unable to match security %s: %w", trans.Ticker, err)
 
-				return
+					return
+				}
+
+				if r == nil {
+					log.Errorf("unable to match security %s", trans.Ticker)
+
+					return
+				}
+
+				if len(r.Content.Data.Security.Result) == 0 {
+					return
+				}
+
+				transaction.Ticker = r.Content.Data.Security.Result[0].GoogleTicker
+				transaction.Commission = ""
+				transaction.Tax = trans.StampDuty
 			}
-
-			if r == nil {
-				log.Errorf("unable to match security %s", trans.Ticker)
-
-				return
-			}
-
-			if len(r.Content.Data.Security.Result) == 0 {
-				return
-			}
-
-			transaction.Ticker = r.Content.Data.Security.Result[0].GoogleTicker
-			transaction.Commission = ""
-			transaction.Tax = trans.StampDuty
 
 			transactions = append(transactions, transaction)
 		}(trans)

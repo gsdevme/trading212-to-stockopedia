@@ -1,5 +1,8 @@
 package trading212
 
+const ExchangeRateEmpty = "Not available"
+const PenceCurrency = "GBX"
+
 type TransactionCsvGBP struct {
 	Action       string `csv:"Action"`
 	DateTime     string `csv:"Time"`
@@ -10,9 +13,10 @@ type TransactionCsvGBP struct {
 	Price        string `csv:"Price / share"`
 	Currency     string `csv:"Currency (Price / share)"`
 	ExchangeRate string `csv:"Exchange rate"`
-	Total        string `csv:"Result (GBP)Total (GBP)"`
+	ID           string `csv:"ID"`
+	Total        string `csv:"Total (GBP)"`
+	// Sometimes omitted
 	StampDuty    string `csv:"Stamp duty reserve tax (GBP)"`
 	FinraFee     string `csv:"Finra fee (GBP)"`
-	ID           string `csv:"ID"`
 	CurrencyFee  string `csv:"Currency conversion fee (GBP)"`
 }
