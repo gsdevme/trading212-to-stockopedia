@@ -67,12 +67,7 @@ func newConvertCommand() *cobra.Command {
 				return fmt.Errorf("unable to marshell to csv: %w", err)
 			}
 
-			create, err := os.Create("stockopedia.csv")
-			if err != nil {
-				return err
-			}
-
-			_, err = create.Write(buf)
+			err = os.WriteFile("stockopedia.csv", buf, fs.ModeSetuid)
 			if err != nil {
 				return err
 			}
