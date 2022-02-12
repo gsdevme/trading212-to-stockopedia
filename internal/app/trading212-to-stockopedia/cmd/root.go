@@ -10,9 +10,6 @@ func NewRootCommand() *cobra.Command {
 	c := cobra.Command{
 		Use:   "Trading212 to Stockopedia",
 		Short: "A simple tool to convert the CSV from Trading212 to a folio compatible CSV for Stockopedia",
-		Run: func(cmd *cobra.Command, args []string) {
-			cmd.HelpFunc()(cmd, args)
-		},
 	}
 
 	d := os.Getenv("DEBUG")
