@@ -14,7 +14,7 @@ func NewRootCommand() *cobra.Command {
 
 	d := os.Getenv("DEBUG")
 
-	if len(d) > 0 {
+	if d != "" {
 		log.SetLevel(log.Debug)
 	}
 
