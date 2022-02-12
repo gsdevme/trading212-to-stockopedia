@@ -16,10 +16,7 @@ type ProgressBarTicker struct {
 }
 
 func (p *ProgressBarTicker) Tick() {
-	err := p.bar.Add(1)
-	if err != nil {
-		return
-	}
+	_ = p.bar.Add(1)
 }
 
 func newConvertCommand() *cobra.Command {
