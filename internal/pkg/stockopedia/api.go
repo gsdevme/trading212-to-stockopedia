@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/google/martian/log"
 	"golang.org/x/net/publicsuffix"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -74,7 +74,7 @@ func (c *ApiClient) SearchSecurity(q string) (*SearchResults, error) {
 
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}

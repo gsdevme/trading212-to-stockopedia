@@ -26,16 +26,16 @@ func TestLoadTransactions(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "simple",
-			args:    args{
+			name: "simple",
+			args: args{
 				filename: fmt.Sprintf("%s/%s", testDirectory, "simple.csv"),
 			},
-			want:    &[]TransactionCsvGBP{
+			want: &[]TransactionCsvGBP{
 				TransactionCsvGBP{
-					Action:       "Deposit",
-					DateTime:     "2021-08-27 09:54:04",
-					Total:        "550.00",
-					ID:           "1DX",
+					Action:   "Deposit",
+					DateTime: "2021-08-27 09:54:04",
+					Total:    "550.00",
+					ID:       "1DX",
 				},
 				TransactionCsvGBP{
 					Action:       "Market buy",
