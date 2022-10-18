@@ -16,7 +16,7 @@ type TransactionCsvGBP struct {
 	ID           string `csv:"ID"`
 	Total        string `csv:"Total (GBP)"`
 	// Sometimes omitted
-	StampDuty    string `csv:"Stamp duty reserve tax (GBP)"`
-	FinraFee     string `csv:"Finra fee (GBP)"`
-	CurrencyFee  string `csv:"Currency conversion fee (GBP)"`
+	StampDuty   string `csv:"Stamp duty reserve tax (GBP)"`
+	FinraFee    string `csv:"Finra fee (GBP)"`
+	CurrencyFee string `csv:"Currency conversion fee (GBP)"`
 }
